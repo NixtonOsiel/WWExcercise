@@ -14,5 +14,4 @@ jobs:
     needs: build
     runs-on: macOS-latest
     steps:
-      - run: |
-      - only-testing: FoodListViewModelTests
+      - run: ./test_server.sh
