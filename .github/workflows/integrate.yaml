@@ -15,7 +15,6 @@ jobs:
       run: bundle install
     - name: Unit tests
       run: bundle exec fastlane tests
-    - name: UITest
     - name: iOS build setup
       run: |
         xcodebuild build-for-testing -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12' #-allowProvisioningUpdates
