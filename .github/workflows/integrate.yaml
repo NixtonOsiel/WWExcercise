@@ -2,7 +2,6 @@ name: Swift
 
 on:
   push:
-  pull_request:
 
 jobs:    
   test:
@@ -17,6 +16,5 @@ jobs:
     - name: Unit tests
       run: bundle exec fastlane tests
     - name: UITest
-      working-directory: WW-Exercise-01
-      run: |
-       xcodebuild build-for-testing -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11' #-allowProvisioningUpdates
+      - name: testing ... iPhone 12
+        run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12'
