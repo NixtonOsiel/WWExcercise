@@ -16,15 +16,14 @@ jobs:
         set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
     - name: Upload products
       uses: actions/upload-artifact@v1
-      with:
-        name: Products
-        path: DerivedData/Build/Products
+
+
   unit_test:
     name: Unit test
     env:
       DEVICE: "iPhone 11"
       DERIVED_DATA_PATH: "DerivedData"
-      UNIT_TEST_TARGET: "BudgetKeeperTests"
+      UNIT_TEST_TARGET: "FoodListViewModelTests"
     runs-on: macOS-latest
     needs: build
     steps:
@@ -42,12 +41,13 @@ jobs:
       with:
         name: TestLogs
         path: DerivedData/Logs/Test
+
   ui_test:
     name: UI test
     env:
       DEVICE: "iPhone 11"
       DERIVED_DATA_PATH: "DerivedData"
-      UI_TEST_TARGET: "BudgetKeeperUITests"
+      UI_TEST_TARGET: "WW_Exercise_01UITests"
     runs-on: macOS-latest
     needs: build
     steps:
