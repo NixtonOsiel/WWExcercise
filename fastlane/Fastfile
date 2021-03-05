@@ -18,8 +18,7 @@ default_platform(:ios)
 platform :ios do
   desc "Lane to run the unit tests"
   lane :tests do
-    run_tests(device: "iPhone 11"
-            workspace: "WW-Exercise-01",
-            scheme: "MyAppTest")
+    run_tests(device: "iPhone 11",
+            scheme: "DocumentsValidator")
   end
 end
