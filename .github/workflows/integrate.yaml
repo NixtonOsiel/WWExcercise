@@ -1,17 +1,12 @@
 name: Feature pipeline
 on: push
 jobs:
-  setup:
-    runs-on: macOS-latest
-    steps:
-      - run: ./setup_server.sh
   build:
-    needs: setup
     runs-on: macOS-latest
     steps:
-      - run: ./build_server.sh
-  test:
-    needs: build
-    runs-on: macOS-latest
-    steps:
-      - run: ./test_server.sh
+      - name: Checkout project
+        uses: actions/checkout@v2
+        uses: actions/setup-node@v1
+        - run: npm ci
+        - run: npm test
+        - run: npm run build
