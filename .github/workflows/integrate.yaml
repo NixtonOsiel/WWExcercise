@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Install k6 by homebrew
-        run: brew install k6
+        run: brew install
 
       - name: Local k6 test
         run: FoodListViewModelTests
