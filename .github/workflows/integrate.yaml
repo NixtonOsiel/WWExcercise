@@ -1,62 +1,18 @@
 name: Feature pipeline
 on: push
 jobs:
+  setup:
+    runs-on: macOS-latest
+    steps:
+      - run: ./setup_server.sh
   build:
-    name: Build
-    env:
-      SCHEME: "WW-Exercise-01"
-      DEVICE: "iPhone 11"
-      DERIVED_DATA_PATH: "DerivedData"
+    needs: setup
     runs-on: macOS-latest
     steps:
-    - name: Checkout project
-      uses: actions/checkout@v1
-    - name: Build application
-      run: |
-        set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
-    - name: Upload products
-      uses: actions/upload-artifact@v1
-
-
-  unit_test:
-    name: Unit test
-    env:
-      DEVICE: "iPhone 11"
-      DERIVED_DATA_PATH: "DerivedData"
-      UNIT_TEST_TARGET: "FoodListViewModelTests"
-    runs-on: macOS-latest
+      - run: ./build_server.sh
+  test:
     needs: build
-    steps:
-    - name: Checkout project
-      uses: actions/checkout@v1
-    - name: Download products
-      uses: actions/download-artifact@v1
-      with:
-        name: Products
-    - name: Run unit tests
-      run: |
-        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH -enableCodeCoverage YES -only-testing:$UNIT_TEST_TARGET | xcpretty --color --simple
-    - name: Upload test logs
-      uses: actions/upload-artifact@v1
-      with:
-        name: TestLogs
-        path: DerivedData/Logs/Test
-
-  ui_test:
-    name: UI test
-    env:
-      DEVICE: "iPhone 11"
-      DERIVED_DATA_PATH: "DerivedData"
-      UI_TEST_TARGET: "WW_Exercise_01UITests"
     runs-on: macOS-latest
-    needs: build
     steps:
-    - name: Checkout project 
-      uses: actions/checkout@v1
-    - name: Download products
-      uses: actions/download-artifact@v1
-      with:
-        name: Products
-    - name: Run UI tests
-      run: |
-        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH -enableCodeCoverage YES -only-testing:$UI_TEST_TARGET | xcpretty  --color --simple
+      - run: |
+      - only-testing: FoodListViewModelTests
