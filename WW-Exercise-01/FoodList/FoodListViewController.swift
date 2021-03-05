@@ -52,13 +52,13 @@ final class FoodListViewController: UICollectionViewController {
                                        context: nil)
 
             cell.imageTapped = { [weak self] in
-//                print(foodListItem.title)
+                print(foodListItem.title)
 
-//                self?.didSelectFoodItem?(foodListItem)
-//                let infoAlert = UIAlertController(title: "Tapped:", message: "\(foodList.title)", preferredStyle: .alert)
-//                infoAlert.popoverPresentationController?.sourceView = cell
-//                infoAlert.addAction(.init(title: "OK", style: .default, handler: nil))
-//                self?.present(infoAlert, animated: true, completion: nil)
+                self?.didSelectFoodItem?(foodListItem)
+                let infoAlert = UIAlertController(title: "Tapped:", message: "\(foodListItem.title)", preferredStyle: .alert)
+                infoAlert.popoverPresentationController?.sourceView = cell
+                infoAlert.addAction(.init(title: "OK", style: .default, handler: nil))
+                self?.present(infoAlert, animated: true, completion: nil)
             }
 
             return cell
