@@ -27,9 +27,3 @@ jobs:
 
       - name: testing ... iPhone 11
         run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11'
-        
-      - name: testing ... iPhone 11 Pro Max
-        run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max'
-
-      - name: testing ... iPad Air
-        run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPad Air (3rd generation)'
