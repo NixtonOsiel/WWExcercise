@@ -1,4 +1,4 @@
-name: integracion con node.JS
+name: Super-Linter
 on: 
   pull_request:
     branches: [ main ]
@@ -6,9 +6,16 @@ on:
     branches: [ main, develop ]
 jobs:
   ci_to_develop:
+    name: Lint code base
     runs-on: macos-latest
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    name: Run Super-Linter
+      uses: github/super-linter@v3
+
       with:
       - run: npm ci
       - run: npm test
