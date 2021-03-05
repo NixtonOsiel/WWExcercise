@@ -9,10 +9,27 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v1
-    - name: Bundle Install
-      run: bundle install
-    - name: iOS build setup
-      run: |
-        xcodebuild build-for-testing -scheme WW-Exercise-01-test -workspace WW-Exercise-01.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11' #-allowProvisioningUpdates
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Bundle Install
+        run: bundle install
+
+      - name: Unit tests
+        run: bundle exec fastlane tests
+
+      - name: CocoaPod Install
+        run: pod install
+
+      - name: iOS build setup
+        run: |
+          xcodebuild build-for-testing -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11' #-allowProvisioningUpdates
+
+      - name: testing ... iPhone 11
+        run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11'
+        
+      - name: testing ... iPhone 11 Pro Max
+        run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11 Pro Max'
+
+      - name: testing ... iPad Air
+        run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPad Air (3rd generation)'
