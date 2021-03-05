@@ -60,7 +60,7 @@ final class FoodListViewModelTests: XCTestCase {
         XCTAssertEqual(mockFoodListViewModelSubscriber.input.count, 1)
 
         viewModelStub.searchFoodList(for: nil)
-        XCTAssertEqual(mockFoodListViewModelSubscriber.input.count, 8)
+        XCTAssertEqual(mockFoodListViewModelSubscriber.input.count, 10)
 
         viewModelStub.searchFoodList(for: "cook")
         XCTAssertEqual(mockFoodListViewModelSubscriber.input.count, 2)
