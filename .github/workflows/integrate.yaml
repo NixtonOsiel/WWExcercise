@@ -1,22 +1,10 @@
-name: Super-Linter
-on: 
-  pull_request:
-    branches: [ main ]
-  push:
-    branches: [ main, develop ]
+name: learn-github-actions
+on: [push]
 jobs:
-  ci_to_develop:
-    name: Lint code base
-    runs-on: macos-latest
-
+  check-bats-version:
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    name: Run Super-Linter
-      uses: github/super-linter@v3
-
-      with:
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install -g bats
+      - run: bats -v
