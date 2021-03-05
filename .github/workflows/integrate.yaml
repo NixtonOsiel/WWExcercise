@@ -15,4 +15,4 @@ jobs:
       run: bundle install
     - name: iOS build setup
       run: |
-        xcodebuild build-for-testing -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11' #-allowProvisioningUpdates
+        xcodebuild build-for-testing -scheme WW-Exercise-01-test -workspace WW-Exercise-01.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11' #-allowProvisioningUpdates
