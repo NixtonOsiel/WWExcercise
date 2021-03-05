@@ -1,10 +1,7 @@
 name: Swift
 
 on:
-  push:
-    branches: [ master, develop ]
-  pull_request:
-    branches: [ master, develop ]
+  [ push, pull request ]
 
 jobs:    
   test:
@@ -19,4 +16,5 @@ jobs:
     - name: Unit tests
       run: bundle exec fastlane tests
     - name: UITest
-      run: bundle exec fastlane UITest
+      run: |
+       xcodebuild build-for-testing -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12' #-allowProvisioningUpdates
