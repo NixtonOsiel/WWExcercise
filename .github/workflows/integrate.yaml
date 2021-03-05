@@ -1,16 +1,19 @@
-on: [push]
+name: Swift
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
-  k6_local_test:
-    name: k6 local test on macos
+  build:
+
     runs-on: macos-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Install k6 by homebrew
-        run: brew install
-
-      - name: Local k6 test
-        run: FoodListViewModelTests
+    - uses: actions/checkout@v2
+    - name: Build
+      run: swift build -v
+    - name: Run tests
+      run: swift test -v
