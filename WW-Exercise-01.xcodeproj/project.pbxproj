@@ -54,6 +54,8 @@
 
 /* Begin PBXFileReference section */
 		0F1C7C08BD3930EA34D7ACB6 /* Pods_WW_Exercise_01.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WW_Exercise_01.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23E252E925F1E4F00061B447 /* UnitTes.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = UnitTes.xctestplan; sourceTree = SOURCE_ROOT; };
+		23E252ED25F1E5AA0061B447 /* FullTest.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = file; path = FullTest.xctestplan; sourceTree = SOURCE_ROOT; };
 		303D85A025B51819004D0B53 /* String+Formatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "String+Formatter.swift"; path = "WW-Exercise-01/App/Helpers/String+Formatter.swift"; sourceTree = SOURCE_ROOT; };
 		303D85A525B518EF004D0B53 /* StringFormatterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringFormatterTests.swift; sourceTree = "<group>"; };
 		30609E9E25B4893E0022264E /* FoodListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodListViewModelTests.swift; sourceTree = "<group>"; };
@@ -278,6 +280,8 @@
 			isa = PBXGroup;
 			children = (
 				B81FCBBD1D36AD1F003CE14D /* WW_Exercise_01UITests.swift */,
+				23E252E925F1E4F00061B447 /* UnitTes.xctestplan */,
+				23E252ED25F1E5AA0061B447 /* FullTest.xctestplan */,
 				B81FCBBF1D36AD1F003CE14D /* Info.plist */,
 			);
 			path = "WW-Exercise-01UITests";

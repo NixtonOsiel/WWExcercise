@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "D5B9EE58-AD2D-4077-BD06-D12FA9D78A80",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:WW-Exercise-01.xcodeproj",
+        "identifier" : "B81FCBAD1D36AD1F003CE14D",
+        "name" : "WW-Exercise-01Tests"
+      }
+    }
+  ],
+  "version" : 1
+}
