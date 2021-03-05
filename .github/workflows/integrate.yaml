@@ -1,10 +1,62 @@
-name: learn-github-actions
-on: [push]
+name: Feature pipeline
+on: push
 jobs:
-  check-bats-version:
-    runs-on: ubuntu-latest
+  build:
+    name: Build
+    env:
+      SCHEME: "WW-Exercise-01"
+      DEVICE: "iPhone 11"
+      DERIVED_DATA_PATH: "DerivedData"
+    runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-      - run: npm install -g bats
-      - run: bats -v
+    - name: Checkout project
+      uses: actions/checkout@v1
+    - name: Build application
+      run: |
+        set -o pipefail && xcodebuild clean -scheme $SCHEME -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH build-for-testing | xcpretty --color --simple
+    - name: Upload products
+      uses: actions/upload-artifact@v1
+      with:
+        name: Products
+        path: DerivedData/Build/Products
+  unit_test:
+    name: Unit test
+    env:
+      DEVICE: "iPhone 11"
+      DERIVED_DATA_PATH: "DerivedData"
+      UNIT_TEST_TARGET: "BudgetKeeperTests"
+    runs-on: macOS-latest
+    needs: build
+    steps:
+    - name: Checkout project
+      uses: actions/checkout@v1
+    - name: Download products
+      uses: actions/download-artifact@v1
+      with:
+        name: Products
+    - name: Run unit tests
+      run: |
+        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH -enableCodeCoverage YES -only-testing:$UNIT_TEST_TARGET | xcpretty --color --simple
+    - name: Upload test logs
+      uses: actions/upload-artifact@v1
+      with:
+        name: TestLogs
+        path: DerivedData/Logs/Test
+  ui_test:
+    name: UI test
+    env:
+      DEVICE: "iPhone 11"
+      DERIVED_DATA_PATH: "DerivedData"
+      UI_TEST_TARGET: "BudgetKeeperUITests"
+    runs-on: macOS-latest
+    needs: build
+    steps:
+    - name: Checkout project 
+      uses: actions/checkout@v1
+    - name: Download products
+      uses: actions/download-artifact@v1
+      with:
+        name: Products
+    - name: Run UI tests
+      run: |
+        set -o pipefail && xcodebuild test-without-building -xctestrun $(find . -type f -name "*.xctestrun") -destination "platform=iOS Simulator,name=$DEVICE" -derivedDataPath $DERIVED_DATA_PATH -enableCodeCoverage YES -only-testing:$UI_TEST_TARGET | xcpretty  --color --simple
