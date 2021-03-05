@@ -9,17 +9,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-
-
-      - name: CocoaPod Install
-        run: pod install
-
-      - name: iOS build setup
-        run: |
-          xcodebuild build-for-testing -scheme affirm-me-test -workspace WW-Exercise-01.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11' #-allowProvisioningUpdates
-
-      - name: testing ... iPhone 11
-        run: xcodebuild test-without-building -scheme affirm-me-test -workspace WW-Exercise-01.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 11'
+    - name: Checkout
+      uses: actions/checkout@v1
+    - name: Bundle Install
+      run: bundle install
+    - name: Unit tests
+      run: bundle exec fastlane tests
