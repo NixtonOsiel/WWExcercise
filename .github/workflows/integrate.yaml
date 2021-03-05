@@ -16,5 +16,5 @@ jobs:
     - name: Unit tests
       run: bundle exec fastlane tests
     - name: UITest
-      - name: testing ... iPhone 12
-        run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12'
+    - name: testing ... iPhone 12
+      run: xcodebuild test-without-building -scheme affirm-me-test -workspace affirm-me.xcworkspace -destination 'platform=iOS Simulator,name=iPhone 12'
