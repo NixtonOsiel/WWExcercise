@@ -1,13 +1,10 @@
-name: Feature pipeline
-on: push
-jobs:
-  build:
-    runs-on: macOS-latest
+name: Run tests
+
+on: [push, pull_request]
+
+jobs:  
+  test:
+    runs-on: macos-latest
+
     steps:
-      - name: Checkout project
-        uses: actions/checkout@v2
-        uses: actions/setup-node@v1
-        with: 
-          node-version: 7
-        - run: npm test
-        - run: npm run build
+    - name: …
