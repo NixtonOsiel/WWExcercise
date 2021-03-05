@@ -18,3 +18,5 @@ jobs:
       run: bundle install
     - name: Unit tests
       run: bundle exec fastlane tests
+    - name: UITest
+      run: bundle exec fastlane UITest
